@@ -12,7 +12,6 @@ public:
         next = NULL;
         prev = NULL;
     }
-
 };
 
 typedef class Node* node;
@@ -44,7 +43,7 @@ DoubleLinkedList::DoubleLinkedList(){
 int DoubleLinkedList::size(){
     int count = 0;
     node temp = head;
-    while(temp != tail->next){
+    while(temp != NULL){
         ++count;
         temp = temp->next;
     }
@@ -55,10 +54,9 @@ int DoubleLinkedList::getIndex(int index){
     if(index > size() || index <= 0) return INT_MIN;
 
     node tmp = head;
-    for(int i=1; i<index; i++){
+    for(int i = 1; i < index; i++){
         tmp = tmp->next;
     }
-    
     return tmp->data;
 }
 
@@ -88,17 +86,14 @@ void DoubleLinkedList::addMiddle(int val, int index){
     }
 
     node newNode = new Node(val);
-    
     node tmp = head;
-    for(int i = 1; i < index-1; i++){
+    for(int i = 1; i < index - 1; i++){
         tmp = tmp->next;
     } 
-   
-    newNode->next =tmp->next;
+    newNode->next = tmp->next;
     tmp->next->prev = newNode;
     newNode->prev = tmp;
     tmp->next = newNode;
-
 }
 
 void DoubleLinkedList::addLast(int val){
@@ -117,68 +112,83 @@ void DoubleLinkedList::addLast(int val){
 
 void DoubleLinkedList::deleteFirst(){
     if(head == NULL) return;
+
+    node tmp = head;
+
     if(head == tail) {
         head = NULL;
         tail = NULL;
-        return;
+    } else {
+        head = head->next;
+        head->prev = NULL;
     }
-    head = head->next;
+
+    delete tmp;  // Xóa nút đầu tiên
 }
 
 void DoubleLinkedList::deleteLast(){
     if(head == NULL) return;
+
+    node tmp = tail;
+
     if(head == tail){
         head = NULL;
         tail = NULL;
-        return;
+    } else {
+        tail = tail->prev;
+        tail->next = NULL;
     }
-    tail = tail->prev;
+
+    delete tmp;  // Xóa nút cuối cùng
 }
 
 void DoubleLinkedList::deleteMiddle(int index){
     if(index <= 0 || index > size()) return;
     
     if(head == tail){
-        head = NULL; tail = NULL; return;
+        delete head;
+        head = NULL; 
+        tail = NULL; 
+        return;
     }
     
     if(index == 1){
-        node tmp = head;
-        head = head->next; 
-        tmp = NULL;
+        deleteFirst();
         return;
     }
 
     if(index == size()){
-        node tmp = tail;
-        tail = tail->prev; 
-        tmp = NULL;
+        deleteLast();
         return;
     }
 
     node tmp = head;
-    for(int i=1; i<index-1; i++){
+    for(int i = 1; i < index; i++){
         tmp = tmp->next;
     }
-    
-    tmp->next = tmp->next->next;
-    tmp->next->prev = tmp;
 
+    tmp->prev->next = tmp->next;
+    tmp->next->prev = tmp->prev;
+
+    delete tmp;  
 }
+
 void DoubleLinkedList::printFirst(){
     node tmp = head;
-    while(tmp != tail->next){
+    while(tmp != NULL){
         cout << tmp->data << " ";
         tmp = tmp->next;
     }
 }
+
 void DoubleLinkedList::printLast(){
     node tmp = tail;
-    while(tmp != head->prev){
+    while(tmp != NULL){
         cout << tmp->data << " ";
         tmp = tmp->prev;
     }
 }
+
 
 int main() {
     // Tạo danh sách liên kết đôi
