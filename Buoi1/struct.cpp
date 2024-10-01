@@ -17,6 +17,6 @@ struct SinhVien{
 };
 
 int main(){
-    SinhVien y{"Hai", "k68-it1", "23020055"};
+    SinhVien y("Hai", "k68-it1", "23020055");
     y.in();
 }
