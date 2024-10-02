@@ -13,8 +13,9 @@ struct Node{
 typedef struct Node* node;
 
 class LinkedList{
-public:
+private:
     node head;
+    int currSize;
 public:
     LinkedList();
     int size();
@@ -31,16 +32,11 @@ public:
 
 LinkedList::LinkedList(){
     head = NULL;
+    currSize = 0;
 }
 
 int LinkedList::size(){
-    int cnt = 0;
-    node tmp = head;
-    while(tmp != NULL){
-        ++cnt;
-        tmp = tmp->next;
-    }
-    return cnt;
+    return currSize;
 }
 
 int LinkedList::getIndex(int index){
@@ -57,6 +53,7 @@ void LinkedList::insertFirst(int val){
     node tmp = new Node(val);
 	tmp->next = head;
 	head = tmp;
+    ++currSize;
 }
 
 
@@ -70,6 +67,7 @@ void LinkedList::insertLast(int val){
         }
         p->next = tmp;
     }
+    ++currSize;
 }
 
 
@@ -86,12 +84,14 @@ void LinkedList::insertMiddle(int val, int index){
 	node tmp = new Node(val);
 	tmp->next = p->next;
 	p->next = tmp;
+    ++currSize;
 }
 
 
 void LinkedList::deleteFirst(){
     if(head == NULL) return;
-    else head = head->next;
+    head = head->next;
+    --currSize;
 }
 
 
@@ -105,20 +105,23 @@ void LinkedList::deleteLast(){
         }
         p->next = NULL;
     }
+    --currSize;
 }
 
 
 void LinkedList::deleteMiddle(int index){
     if(index <= 0 || index > size()) return;
-	if(index == 1) {
+	else if(index == 1) {
 		head = head->next;
-		return;
 	}
-    node p = head;
-    for(int i=1; i<index-1; i++){
-        p = p->next;
+    else{
+        node p = head;
+        for(int i=1; i<index-1; i++){
+            p = p->next;
+        }
+        p->next = p->next->next;
     }
-    p->next = p->next->next;
+    --currSize;
 }
 
 void LinkedList::printFirst(){

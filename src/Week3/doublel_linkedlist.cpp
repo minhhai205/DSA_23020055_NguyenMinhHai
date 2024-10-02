@@ -20,7 +20,7 @@ class DoubleLinkedList{
 private:
     node head;
     node tail;
-
+    int currSize;
 public:
     DoubleLinkedList();
     int size();
@@ -38,16 +38,11 @@ public:
 DoubleLinkedList::DoubleLinkedList(){
     head = NULL;
     tail = NULL;
+    currSize = 0;
 }
 
 int DoubleLinkedList::size(){
-    int count = 0;
-    node temp = head;
-    while(temp != NULL){
-        ++count;
-        temp = temp->next;
-    }
-    return count;
+    return currSize;
 }
 
 int DoubleLinkedList::getIndex(int index){
@@ -66,12 +61,15 @@ void DoubleLinkedList::addFirst(int val){
     if(head == NULL){
         head = tmp; 
         tail = tmp;
-        return;
     }
 
-    tmp->next = head;
-    head->prev = tmp;
-    head = tmp;
+    else {
+        tmp->next = head;
+        head->prev = tmp;
+        head = tmp;
+    }
+
+    ++currSize;
 }
 
 void DoubleLinkedList::addMiddle(int val, int index){
@@ -94,6 +92,8 @@ void DoubleLinkedList::addMiddle(int val, int index){
     tmp->next->prev = newNode;
     newNode->prev = tmp;
     tmp->next = newNode;
+
+    ++currSize;
 }
 
 void DoubleLinkedList::addLast(int val){
@@ -102,12 +102,14 @@ void DoubleLinkedList::addLast(int val){
     if(head == NULL){
         head = tmp; 
         tail = tmp;
-        return;
     }
 
-    tmp->prev = tail;
-    tail->next = tmp;
-    tail = tmp;
+    else {
+        tmp->prev = tail;
+        tail->next = tmp;
+        tail = tmp;
+    }
+    ++currSize;
 }
 
 void DoubleLinkedList::deleteFirst(){
@@ -124,6 +126,7 @@ void DoubleLinkedList::deleteFirst(){
     }
 
     delete tmp;  // Xóa nút đầu tiên
+    --currSize;
 }
 
 void DoubleLinkedList::deleteLast(){
@@ -140,6 +143,7 @@ void DoubleLinkedList::deleteLast(){
     }
 
     delete tmp;  // Xóa nút cuối cùng
+    --currSize;
 }
 
 void DoubleLinkedList::deleteMiddle(int index){
@@ -164,6 +168,7 @@ void DoubleLinkedList::deleteMiddle(int index){
     tmp->next->prev = tmp->prev;
 
     delete tmp;  
+    --currSize;
 }
 
 void DoubleLinkedList::printFirst(){
