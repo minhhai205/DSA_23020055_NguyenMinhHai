@@ -144,14 +144,7 @@ void DoubleLinkedList::deleteLast(){
 
 void DoubleLinkedList::deleteMiddle(int index){
     if(index <= 0 || index > size()) return;
-    
-    if(head == tail){
-        delete head;
-        head = NULL; 
-        tail = NULL; 
-        return;
-    }
-    
+ 
     if(index == 1){
         deleteFirst();
         return;
