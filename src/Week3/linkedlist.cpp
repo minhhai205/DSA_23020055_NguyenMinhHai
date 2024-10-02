@@ -43,6 +43,15 @@ int LinkedList::size(){
     return cnt;
 }
 
+int LinkedList::getIndex(int index){
+    if(index > size() || index <= 0) return INT_MIN;
+
+    node tmp = head;
+    for(int i = 1; i < index; i++){
+        tmp = tmp->next;
+    }
+    return tmp->data;
+}
 
 void LinkedList::insertFirst(int val){
     node tmp = new Node(val);
