@@ -12,29 +12,50 @@ struct Node{
 };
 typedef struct Node* node;
 
-// lay do dai dslk
-int size(node a){
+class LinkedList{
+public:
+    node head;
+public:
+    LinkedList();
+    int size();
+    int getIndex(int index);
+    void insertFirst(int val);
+    void insertLast(int val);
+    void insertMiddle(int val, int index);
+    void deleteFirst();
+    void deleteLast();
+    void deleteMiddle(int index);
+    void printFirst();
+    void printLast();
+};
+
+LinkedList::LinkedList(){
+    head = NULL;
+}
+
+int LinkedList::size(){
     int cnt = 0;
-    while(a != NULL){
+    node tmp = head;
+    while(tmp != NULL){
         ++cnt;
-        a = a->next;
+        tmp = tmp->next;
     }
     return cnt;
 }
 
-// them mot phan tu vao dau dslk
-void insertFirst(node &a, int x){
-    node tmp = new Node(x);
-	tmp->next = a;
-	a = tmp;
+
+void LinkedList::insertFirst(int val){
+    node tmp = new Node(val);
+	tmp->next = head;
+	head = tmp;
 }
 
-// them mot phan tu vao cuoi dslk
-void insertLast(node &a, int x){
-    node tmp = new Node(x);
-    if(a == NULL) a = tmp;
+
+void LinkedList::insertLast(int val){
+    node tmp = new Node(val);
+    if(head == NULL) head = tmp;
     else{
-        node p = a;
+        node p = head;
         while(p->next != NULL){
             p = p->next;
         }
@@ -42,35 +63,34 @@ void insertLast(node &a, int x){
     }
 }
 
-//them mot phan tu vao giua
-void insertMiddle(node &a, int x, int pos){
-	int n = size(a);
-	if(pos <= 0 || pos > n + 1) return;
-	if(pos == 1){
-		insertFirst(a, x); return;
+
+void LinkedList::insertMiddle(int val, int index){
+	if(index <= 0 || index > size() + 1) return;
+	if(index == 1){
+		insertFirst(val); return;
 	}
-	node p = a;
-	for(int i = 1; i < pos - 1; i++){
+	node p = head;
+	for(int i = 1; i < index - 1; i++){
 		p = p->next;
 	}
 	
-	node tmp = new Node(x);
+	node tmp = new Node(val);
 	tmp->next = p->next;
 	p->next = tmp;
 }
 
-//xoa phan tu o dau
-void deleteFirst(node &a){
-    if(a == NULL) return;
-    else a = a->next;
+
+void LinkedList::deleteFirst(){
+    if(head == NULL) return;
+    else head = head->next;
 }
 
-//xoa phan tu o cuoi
-void deleteLast(node &a){
-    if(a == NULL) return;
-    else if(a->next == NULL) a = NULL;
+
+void LinkedList::deleteLast(){
+    if(head == NULL) return;
+    else if(head->next == NULL) head = NULL;
     else{
-        node p = a;
+        node p = head;
         while(p->next->next != NULL){
             p = p->next;
         }
@@ -78,74 +98,75 @@ void deleteLast(node &a){
     }
 }
 
-// xoa phan tu o giua
-void deleteMiddle(node &a, int pos){
-    if(pos <= 0 || pos > size(a)) return;
-	if(pos == 1) {
-		a = a->next;
+
+void LinkedList::deleteMiddle(int index){
+    if(index <= 0 || index > size()) return;
+	if(index == 1) {
+		head = head->next;
 		return;
 	}
-    node p = a;
-    for(int i=1; i<pos-1; i++){
+    node p = head;
+    for(int i=1; i<index-1; i++){
         p = p->next;
     }
     p->next = p->next->next;
 }
 
-void printFirst(node a){
-	while(a != NULL){
-		cout << a->data << " ";
-		a = a->next;
+void LinkedList::printFirst(){
+    node tmp = head;
+	while(tmp != NULL){
+		cout << tmp->data << " ";
+		tmp = tmp->next;
 	}
 }
 
-void printLast(node a){
-	if( a == NULL) return;
-	printLast(a->next);
-	cout << a->data << " ";
+void printLastHelper(node tmp) {
+    if (tmp == NULL) return;
+    printLastHelper(tmp->next);  
+    cout << tmp->data << " ";    
+}
+
+void LinkedList::printLast(){
+    printLastHelper(head);
 }
 
 int main() {
-    node a = nullptr; // Khởi tạo danh sách liên kết rỗng
+    // Tạo danh sách liên kết đơn
+    LinkedList list;
 
     // Thêm phần tử vào đầu danh sách
-    insertFirst(a, 10);   // Danh sách: 10
-    insertFirst(a, 5);    // Danh sách: 5 10
+    list.insertFirst(10);  // Danh sách: 10
+    list.insertFirst(5);   // Danh sách: 5 10
 
     // Thêm phần tử vào cuối danh sách
-    insertLast(a, 20);    // Danh sách: 5 10 20
-    insertLast(a, 25);    // Danh sách: 5 10 20 25
+    list.insertLast(20);   // Danh sách: 5 10 20
+    list.insertLast(25);   // Danh sách: 5 10 20 25
 
     // Thêm phần tử vào vị trí giữa
-    insertMiddle(a, 15, 3);  // Danh sách: 5 10 15 20 25
-    insertMiddle(a, 30, 6);  // Danh sách: 5 10 15 20 25 30
+    list.insertMiddle(15, 3); // Danh sách: 5 10 15 20 25
+    list.insertMiddle(30, 6); // Danh sách: 5 10 15 20 25 30
 
     // In danh sách từ đầu đến cuối
     cout << "Danh sách từ đầu: ";
-    printFirst(a);
-    cout << endl;
-
-    // In danh sách từ cuối lên đầu
-    cout << "Danh sách từ cuối: ";
-    printLast(a);
+    list.printFirst();
     cout << endl;
 
     // Xóa phần tử đầu tiên
-    deleteFirst(a);  // Danh sách: 10 15 20 25 30
+    list.deleteFirst();  // Danh sách: 10 15 20 25 30
     cout << "Sau khi xóa phần tử đầu tiên: ";
-    printFirst(a);
+    list.printFirst();
     cout << endl;
 
     // Xóa phần tử cuối cùng
-    deleteLast(a);   // Danh sách: 10 15 20 25
+    list.deleteLast();   // Danh sách: 10 15 20 25
     cout << "Sau khi xóa phần tử cuối cùng: ";
-    printFirst(a);
+    list.printFirst();
     cout << endl;
 
     // Xóa phần tử ở vị trí giữa (vị trí 2)
-    deleteMiddle(a, 2);  // Danh sách: 10 20 25
+    list.deleteMiddle(2);  // Danh sách: 10 20 25
     cout << "Sau khi xóa phần tử ở vị trí giữa: ";
-    printFirst(a);
+    list.printFirst();
     cout << endl;
 
     return 0;
