@@ -12,7 +12,6 @@ struct Node{
 };
 typedef struct Node* node;
 
-
 // lay do dai dslk
 int size(node a){
     int cnt = 0;
