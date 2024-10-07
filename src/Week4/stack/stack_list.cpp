@@ -5,7 +5,7 @@ class Stack {
 public:
     Stack(int n);
     void push(int val);  
-    void pop();          
+    int pop();          
     int top();           
     bool isEmpty();      
     int size();          
@@ -27,16 +27,15 @@ void Stack::push(int val) {
         cout << "Stack overflow!" << endl;
         return;
     }
-    a[currSize] = val;
-    currSize++;
+    a[currSize++] = val;
 }
 
-void Stack::pop() {
+int Stack::pop() {
     if (currSize == 0) {
         cout << "Stack underflow!" << endl;
-        return;
+        return INT_MIN;
     }
-    currSize--;
+    return a[--currSize];  
 }
 
 int Stack::top() {

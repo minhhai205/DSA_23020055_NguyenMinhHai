@@ -38,16 +38,17 @@ void Stack::push(int val) {
     currSize++;
 }
 
-void Stack::pop() {
+int Stack::pop() {
     if (head == nullptr) {
         cout << "Stack is empty!" << endl;
-        return;
+        return INT_MIN;
     }
 
-    node tmp = head;
+    int val = head->data;
     head = head->next;  
-    delete tmp;
     currSize--;
+
+    return val;
 }
 
 int Stack::top() {
