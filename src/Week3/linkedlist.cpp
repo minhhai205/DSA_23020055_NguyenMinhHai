@@ -1,34 +1,5 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-struct Node{
-    int data;
-    Node *next;
-
-	Node(int new_data) {
-        data = new_data;
-        next = nullptr; 
-    }
-};
-typedef struct Node* node;
-
-class LinkedList{
-private:
-    node head;
-    int currSize;
-public:
-    LinkedList();
-    int size();
-    int getIndex(int index);
-    void insertFirst(int val);
-    void insertLast(int val);
-    void insertMiddle(int val, int index);
-    void deleteFirst();
-    void deleteLast();
-    void deleteMiddle(int index);
-    void printFirst();
-    void printLast();
-};
+#include "linkedlist.h"
+#include<iostream>
 
 LinkedList::LinkedList(){
     head = NULL;
@@ -127,7 +98,7 @@ void LinkedList::deleteMiddle(int index){
 void LinkedList::printFirst(){
     node tmp = head;
 	while(tmp != NULL){
-		cout << tmp->data << " ";
+		std::cout << tmp->data << " ";
 		tmp = tmp->next;
 	}
 }
@@ -135,7 +106,7 @@ void LinkedList::printFirst(){
 void printLastHelper(node tmp) {
     if (tmp == NULL) return;
     printLastHelper(tmp->next);  
-    cout << tmp->data << " ";    
+    std::cout << tmp->data << " ";    
 }
 
 void LinkedList::printLast(){
@@ -159,27 +130,27 @@ int main() {
     list.insertMiddle(30, 6); // Danh sách: 5 10 15 20 25 30
 
     // In danh sách từ đầu đến cuối
-    cout << "Danh sách từ đầu: ";
+    std::cout << "Danh sách từ đầu: ";
     list.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử đầu tiên
     list.deleteFirst();  // Danh sách: 10 15 20 25 30
-    cout << "Sau khi xóa phần tử đầu tiên: ";
+    std::cout << "Sau khi xóa phần tử đầu tiên: ";
     list.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử cuối cùng
     list.deleteLast();   // Danh sách: 10 15 20 25
-    cout << "Sau khi xóa phần tử cuối cùng: ";
+    std::cout << "Sau khi xóa phần tử cuối cùng: ";
     list.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử ở vị trí giữa (vị trí 2)
     list.deleteMiddle(2);  // Danh sách: 10 20 25
-    cout << "Sau khi xóa phần tử ở vị trí giữa: ";
+    std::cout << "Sau khi xóa phần tử ở vị trí giữa: ";
     list.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     return 0;
 }

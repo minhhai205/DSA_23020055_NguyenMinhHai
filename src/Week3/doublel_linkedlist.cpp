@@ -1,39 +1,5 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-class Node{
-public:
-    int data;
-    Node *next;
-    Node *prev;
-
-    Node(int val){
-        data = val;
-        next = NULL;
-        prev = NULL;
-    }
-};
-
-typedef class Node* node;
-
-class DoubleLinkedList{
-private:
-    node head;
-    node tail;
-    int currSize;
-public:
-    DoubleLinkedList();
-    int size();
-    int getIndex(int index);
-    void addFirst(int val);
-    void addMiddle(int val, int index);
-    void addLast(int val);
-    void deleteFirst();
-    void deleteLast();
-    void deleteMiddle(int index);
-    void printFirst();
-    void printLast();
-};
+#include "double_linkedlist.h"
+#include<iostream>
 
 DoubleLinkedList::DoubleLinkedList(){
     head = NULL;
@@ -174,7 +140,7 @@ void DoubleLinkedList::deleteMiddle(int index){
 void DoubleLinkedList::printFirst(){
     node tmp = head;
     while(tmp != NULL){
-        cout << tmp->data << " ";
+        std::cout << tmp->data << " ";
         tmp = tmp->next;
     }
 }
@@ -182,7 +148,7 @@ void DoubleLinkedList::printFirst(){
 void DoubleLinkedList::printLast(){
     node tmp = tail;
     while(tmp != NULL){
-        cout << tmp->data << " ";
+        std::cout << tmp->data << " ";
         tmp = tmp->prev;
     }
 }
@@ -205,31 +171,31 @@ int main() {
     dll.addMiddle(30, 6);  // Danh sách: 5 10 15 20 25 30
 
     // In danh sách từ đầu đến cuối
-    cout << "Danh sách từ đầu: ";
+    std::cout << "Danh sách từ đầu: ";
     dll.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // In danh sách từ cuối về đầu
-    cout << "Danh sách từ cuối: ";
+    std::cout << "Danh sách từ cuối: ";
     dll.printLast();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử đầu tiên
     dll.deleteFirst();  // Danh sách: 10 15 20 25 30
-    cout << "Sau khi xóa phần tử đầu tiên: ";
+    std::cout << "Sau khi xóa phần tử đầu tiên: ";
     dll.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử cuối cùng
     dll.deleteLast();   // Danh sách: 10 15 20 25
-    cout << "Sau khi xóa phần tử cuối cùng: ";
+    std::cout << "Sau khi xóa phần tử cuối cùng: ";
     dll.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử ở vị trí giữa (vị trí 2)
     dll.deleteMiddle(2);  // Danh sách: 10 20 25
-    cout << "Sau khi xóa phần tử ở vị trí giữa: ";
+    std::cout << "Sau khi xóa phần tử ở vị trí giữa: ";
     dll.printFirst();
-    cout << endl;
+    std::cout << std::endl;
     return 0;
 }

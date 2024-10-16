@@ -1,27 +1,6 @@
-#include<bits/stdc++.h>
 
-using namespace std;
-
-
-class List{
-public:
-    List(int n);
-    int length();
-    int getIndex(int index);
-    void addFirst(int val);
-    void addMiddle(int val, int index);
-    void addLast(int val);
-    void deleteFirst();
-    void deleteLast();
-    void deleteMiddle(int index);
-    void printFirst();
-    void printLast();
-
-private:
-    int *a;
-    int size;
-    int currSize;
-};
+#include "list.h"
+#include<iostream>
 
 List::length(){
     return currSize;
@@ -81,13 +60,13 @@ void List::deleteMiddle(int index){
 
 void List::printFirst(){
     for(int i=0; i<currSize; i++){
-        cout << *(a + i) << " ";
+        std::cout << *(a + i) << " ";
     } 
 }
 
 void List::printLast(){
     for(int i = currSize - 1; i>=0; i--){
-        cout << *(a + i) << " ";
+        std::cout << *(a + i) << " ";
     }
 }
 
@@ -101,32 +80,32 @@ int main() {
     myList.addMiddle(7, 1);   // Danh sách: 5 7 10
 
     // In danh sách từ đầu đến cuối
-    cout << "Danh sách từ đầu: ";
+    std::cout << "Danh sách từ đầu: ";
     myList.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // In danh sách từ cuối lên đầu
-    cout << "Danh sách từ cuối: ";
+    std::cout << "Danh sách từ cuối: ";
     myList.printLast();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử đầu tiên
     myList.deleteFirst();     // Danh sách: 7 10
-    cout << "Sau khi xóa phần tử đầu tiên: ";
+    std::cout << "Sau khi xóa phần tử đầu tiên: ";
     myList.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử cuối cùng
     myList.deleteLast();      // Danh sách: 7
-    cout << "Sau khi xóa phần tử cuối cùng: ";
+    std::cout << "Sau khi xóa phần tử cuối cùng: ";
     myList.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     // Xóa phần tử ở giữa (index = 0)
     myList.deleteMiddle(0);   // Danh sách rỗng
-    cout << "Sau khi xóa phần tử ở giữa: ";
+    std::cout << "Sau khi xóa phần tử ở giữa: ";
     myList.printFirst();
-    cout << endl;
+    std::cout << std::endl;
 
     return 0;
 }

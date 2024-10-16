@@ -1,5 +1,5 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include "list.h"
+#include<iostream>
 
 class Stack {
 public:
