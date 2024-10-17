@@ -1,19 +1,4 @@
-#include "list.h"
-#include<iostream>
 
-class Stack {
-public:
-    Stack(int n);
-    void push(int val);  
-    int pop();          
-    int top();           
-    bool isEmpty();      
-    int size();          
-private:
-    int *a;
-    int maxSize;
-    int currSize;
-};
 
 
 Stack::Stack(int n) {

@@ -13,7 +13,7 @@ typedef struct Node* node;
 
 class LinkedList{
 private:
-    node head;
+    node head, tail; // tail de luu node cuoi cung de insertLast voi O(1)
     int currSize;
 public:
     LinkedList();

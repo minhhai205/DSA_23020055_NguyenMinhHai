@@ -1,4 +1,3 @@
-
 #include "list.h"
 #include<iostream>
 
@@ -41,7 +40,7 @@ void List::addMiddle(int val, int index){
 }
 
 void List::deleteFirst(){
-    for(int i=0; i< currSize; i++){
+    for(int i=0; i < currSize - 1; i++){
         *(a + i) = *(a + i + 1);
     }
     --currSize;
@@ -52,7 +51,7 @@ void List::deleteLast(){
 }
 
 void List::deleteMiddle(int index){
-    for(int i=index; i<currSize; i++){
+    for(int i=index; i<currSize-1; i++){
         *(a + i) = *(a + i + 1);
     }
     --currSize;

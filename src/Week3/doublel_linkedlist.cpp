@@ -41,25 +41,27 @@ void DoubleLinkedList::addFirst(int val){
 void DoubleLinkedList::addMiddle(int val, int index){
     if(index <= 0 || index > size() + 1) return;
 
-    if(index == 1) {
-        addFirst(val); return;
+    else if(index == 1) {
+        addFirst(val);
     }
 
-    if(index == size() + 1){
-        addLast(val); return;
+    else if(index == size() + 1){
+        addLast(val);
     }
 
-    node newNode = new Node(val);
-    node tmp = head;
-    for(int i = 1; i < index - 1; i++){
-        tmp = tmp->next;
-    } 
-    newNode->next = tmp->next;
-    tmp->next->prev = newNode;
-    newNode->prev = tmp;
-    tmp->next = newNode;
+    else {
+        node newNode = new Node(val);
+        node tmp = head;
+        for(int i = 1; i < index - 1; i++){
+            tmp = tmp->next;
+        } 
+        newNode->next = tmp->next;
+        tmp->next->prev = newNode;
+        newNode->prev = tmp;
+        tmp->next = newNode;
 
-    ++currSize;
+        ++currSize;
+    }
 }
 
 void DoubleLinkedList::addLast(int val){
@@ -115,26 +117,26 @@ void DoubleLinkedList::deleteLast(){
 void DoubleLinkedList::deleteMiddle(int index){
     if(index <= 0 || index > size()) return;
  
-    if(index == 1){
+    else if(index == 1){
         deleteFirst();
-        return;
     }
 
-    if(index == size()){
+    else if(index == size()){
         deleteLast();
-        return;
     }
 
-    node tmp = head;
-    for(int i = 1; i < index; i++){
-        tmp = tmp->next;
+    else {
+        node tmp = head;
+        for(int i = 1; i < index; i++){
+            tmp = tmp->next;
+        }
+
+        tmp->prev->next = tmp->next;
+        tmp->next->prev = tmp->prev;
+
+        delete tmp;  
+        --currSize;
     }
-
-    tmp->prev->next = tmp->next;
-    tmp->next->prev = tmp->prev;
-
-    delete tmp;  
-    --currSize;
 }
 
 void DoubleLinkedList::printFirst(){
