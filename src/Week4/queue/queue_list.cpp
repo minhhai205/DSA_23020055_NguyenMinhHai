@@ -1,65 +1,14 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include "queue_list.h"
 
-class Queue{
-public:
-    Queue(int n);
-    void enqueue(int val);  
-    int dequeue();          
-    int front();           
-    bool isEmpty();      
-    int size();
-private:
-    int *a;
-    int maxSize;
-    int currSize;
-};
+Queue::Queue(int n){ list = List(n); }
 
-Queue::Queue(int n){
-    a = new int[n];
-    maxSize = n;
-    currSize = 0;
-}
+void Queue::enqueue(int val){ list.addLast(val); }
 
-void Queue::enqueue(int val){
-    if(currSize >= maxSize){
-        cout << "Queue overflow!\n";
-        return;
-    }
+int Queue::dequeue(){  int val = list.getIndex(0); list.deleteFirst(); return val; }
 
-    a[currSize++] = val;
-}
+int Queue::front(){ return list.getIndex(0); } 
 
-int Queue::dequeue(){
-    if (currSize == 0) {
-        cout << "Queue underflow!" << endl;
-        return INT_MIN;
-    }
+bool Queue::isEmpty(){ return list.length() == 0; }
 
-    int val = a[0];
-    for(int i=0; i < currSize - 1; i++){
-        a[i] = a[i + 1];
-    }
-    --currSize;
+int Queue::size(){ return list.length(); }
 
-    return val;
-}
-
-int Queue::front(){
-    if (currSize == 0) {
-        cout << "Queue underflow!" << endl;
-        return INT_MIN;
-    }
-    return a[0];
-} 
-bool Queue::isEmpty(){
-    return currSize == 0;
-}
-
-int Queue::size(){
-    return currSize;
-}
-
-int main(){
-
-}

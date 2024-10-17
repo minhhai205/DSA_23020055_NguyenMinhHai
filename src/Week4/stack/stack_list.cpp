@@ -1,44 +1,16 @@
+#include "stack_list.h"
+#include <iostream>
+#include <climits>
 
+Stack::Stack(int n) { list = List(n); }
 
+void Stack::push(int val) { list.addLast(val); }
 
-Stack::Stack(int n) {
-    a = new int[n];
-    maxSize = n;
-    currSize = 0;
-}
+void Stack::pop() { list.deleteLast(); }
 
-void Stack::push(int val) {
-    if (currSize >= maxSize) {
-        cout << "Stack overflow!" << endl;
-        return;
-    }
-    a[currSize++] = val;
-}
+int Stack::top() { return list.getIndex(list.length() - 1); }
 
-int Stack::pop() {
-    if (currSize == 0) {
-        cout << "Stack underflow!" << endl;
-        return INT_MIN;
-    }
-    return a[--currSize];  
-}
+bool Stack::isEmpty() { return list.length() == 0; }
 
-int Stack::top() {
-    if (currSize == 0) {
-        cout << "Stack is empty!" << endl;
-        return INT_MIN;
-    }
-    return a[currSize - 1];
-}
+int Stack::size() { return list.length(); }
 
-bool Stack::isEmpty() {
-    return currSize == 0;
-}
-
-int Stack::size() {
-    return currSize;
-}
-
-int main(){
-    
-}

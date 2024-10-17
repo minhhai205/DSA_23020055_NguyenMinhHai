@@ -1,7 +1,8 @@
-#pragma 
+#pragma once
 
 class List{
 public:
+    List(){}
     List(int n);
     int length();
     int getIndex(int index);
