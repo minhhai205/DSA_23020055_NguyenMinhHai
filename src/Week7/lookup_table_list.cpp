@@ -27,22 +27,22 @@ public:
     void display();
 };
 
-// Constructor
-KV
+
+KV  // Constructor
 LookupTable<K, V>::LookupTable(int size) {
     maxSize = size;
     currSize = 0;
     arr = new Pair<K, V>[size];
 }
 
-// Return current size: O(1)
-KV
+
+KV  // Return current size: O(1)
 int LookupTable<K, V>::size() {
     return currSize;
 }
 
-// insert: O(n)
-KV
+
+KV  // insert: O(n)
 void LookupTable<K, V>::insert(K key, V value) {
     // kiểm tra và thay thế nếu key đã tồn tại
     if (replace(key, value)) return; 
@@ -59,8 +59,8 @@ void LookupTable<K, V>::insert(K key, V value) {
     ++currSize;
 }
 
-// Binary search for a key: O(log(n))
-KV
+
+KV  // Binary search for a key: O(log(n))
 int LookupTable<K, V>::binarySearch(K key) {
     int left = 0, right = currSize - 1;
 
@@ -75,8 +75,8 @@ int LookupTable<K, V>::binarySearch(K key) {
     return -1;
 }
 
-// Find a value by key: O(log(n))
-KV
+
+KV  // Find a value by key: O(log(n))
 V* LookupTable<K, V>::find(K key) {
     int index = binarySearch(key);
     if (index != -1) {
@@ -85,8 +85,8 @@ V* LookupTable<K, V>::find(K key) {
     return nullptr;
 }
 
-// Replace a value by key: O(log(n))
-KV
+
+KV  // Replace a value by key: O(log(n))
 bool LookupTable<K, V>::replace(K key, V newValue) {
     int index = binarySearch(key);
     if (index != -1) {
@@ -96,8 +96,8 @@ bool LookupTable<K, V>::replace(K key, V newValue) {
     return false;
 }
 
-// Erase a key-value: O(n)
-KV
+
+KV  // Erase a key-value: O(n)
 void LookupTable<K, V>::erase(K key) {
     int index = binarySearch(key);
     if (index == -1) return;
@@ -109,8 +109,8 @@ void LookupTable<K, V>::erase(K key) {
     --currSize;
 }
 
-// Display all key-value: O(n)
-KV
+
+KV  // Display all key-value: O(n)
 void LookupTable<K, V>::display() {
     for (int i = 0; i < currSize; i++) {
         cout << "Key: " << arr[i].key << ", Value: " << arr[i].value << endl;
