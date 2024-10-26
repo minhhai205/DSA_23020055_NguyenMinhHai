@@ -1,6 +1,8 @@
 #pragma once
 /*
-Một Binary Heap là một cây nhị phân hoàn chỉnh . Một binary heap thường được biểu diễn dưới dạng một mảng.
+Một Binary Heap là một cây nhị phân hoàn chỉnh. Mỗi nút (node) trên cây đều chứa một nhãn nhỏ hơn
+hoặc bằng các con của nó (nếu có) và lớn hơn hoặc bằng nút cha (trừ nút gốc là và nó là nút nhỏ nhất).
+Một binary heap thường được biểu diễn dưới dạng một mảng.
 
 Phần tử gốc sẽ ở Arr[0].
 
