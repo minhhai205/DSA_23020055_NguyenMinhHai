@@ -11,6 +11,7 @@ int LinkedList::size(){
     return currSize;
 }
 
+// O(n)
 int LinkedList::getIndex(int index){
     if(index > size() || index <= 0) return INT_MIN;
 
@@ -21,6 +22,7 @@ int LinkedList::getIndex(int index){
     return tmp->data;
 }
 
+// O(1)
 void LinkedList::insertFirst(int val){
     node tmp = new Node(val);
 	tmp->next = head;
@@ -30,7 +32,7 @@ void LinkedList::insertFirst(int val){
     if(head->next == NULL) tail = head;
 }
 
-
+// O(1), O(n) nếu không lưu tail
 void LinkedList::insertLast(int val){
     node tmp = new Node(val);
     if(head == nullptr){
@@ -43,7 +45,7 @@ void LinkedList::insertLast(int val){
     ++currSize;
 }
 
-
+// O(n)
 void LinkedList::insertMiddle(int val, int index){
     int n = size();
 	if(index <= 0 || index > n + 1) return;
@@ -69,14 +71,14 @@ void LinkedList::insertMiddle(int val, int index){
     }
 }
 
-
+// O(1)
 void LinkedList::deleteFirst(){
     if(head == NULL) return;
     head = head->next;
     --currSize;
 }
 
-
+// O(n)
 void LinkedList::deleteLast(){
     if(head == NULL) return;
     else if(head->next == NULL) head = NULL;
@@ -91,7 +93,7 @@ void LinkedList::deleteLast(){
     --currSize;
 }
 
-
+// O(n)
 void LinkedList::deleteMiddle(int index){
     int n = size();
     if(index <= 0 || index > n) return;

@@ -3,7 +3,7 @@ using namespace std;
 
 // sap xep chon O(n^2)
 // dua phan tu nho nhat ve dau day
-void selectionsort(){
+void selectionsort(int a[], int n){
     for(int i=0; i<n-1; i++){
         int pos = i;
         for(int j=i+1; j<n; j++){

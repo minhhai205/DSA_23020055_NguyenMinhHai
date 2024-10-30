@@ -12,11 +12,13 @@ List::List(int n){
     currSize = 0;
 }
 
+// O(1)
 int List::getIndex(int index){
     if(currSize <= 0 || index >= currSize) return INT_MIN;
     return *(a + index);
 }
 
+// O(n)
 void List::addFirst(int val){
     if(currSize >= size) return;
     for(int i=0; i<currSize; i++){
@@ -26,12 +28,14 @@ void List::addFirst(int val){
     currSize++;
 }
 
+// O(1)
 void List::addLast(int val){
     if(currSize >= size) return;
     *(a + currSize) = val;
     currSize++;
 }
 
+// O(n)
 void List::addMiddle(int val, int index){
     if(currSize >= size) return;
     for(int i=index; i<currSize; i++){
@@ -41,6 +45,7 @@ void List::addMiddle(int val, int index){
     ++currSize;
 }
 
+// O(n)
 void List::deleteFirst(){
     for(int i=0; i < currSize - 1; i++){
         *(a + i) = *(a + i + 1);
@@ -48,10 +53,12 @@ void List::deleteFirst(){
     --currSize;
 }
 
+// O(1)
 void List::deleteLast(){
     --currSize;
 }
 
+// O(n)
 void List::deleteMiddle(int index){
     for(int i=index; i<currSize-1; i++){
         *(a + i) = *(a + i + 1);
