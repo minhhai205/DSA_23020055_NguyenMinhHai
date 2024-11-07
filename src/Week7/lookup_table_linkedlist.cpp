@@ -1,49 +1,38 @@
 #include <iostream>
 using namespace std;
 
-#define KV template <typename K, typename V> 
-
-KV
 struct Node {
-    K key;
-    V value;
+    int key;
+    int value;
     Node* next;
 
-    Node(K k, V v) : key(k), value(v), next(nullptr) {}
+    Node(int k, int v) : key(k), value(v), next(nullptr) {}
 };
 
-KV
 class LookupTable {
 private:
-    Node<K, V>* head;
+    Node* head;
     int currSize;
-
-    Node<K, V>* findNode(K key);
-
+    Node* findNode(int key);
 public:
     LookupTable();
     int size();
-    void insert(K key, V value);
-    V* find(K key);
-    bool replace(K key, V newValue);
-    void erase(K key);
+    void insert(int key, int value);
+    int find(int key);
+    void erase(int key);
     void display();
 };
 
+LookupTable::LookupTable() : head(nullptr), currSize(0) {}
 
-KV  // Constructor
-LookupTable<K, V>::LookupTable() : head(nullptr), currSize(0) {}
-
-
-KV  // Return current size: O(1)
-int LookupTable<K, V>::size() {
+// Return current size: O(1)
+int LookupTable::size() {
     return currSize;
 }
 
-
-KV  // Find node by key: O(n)
-Node<K, V>* LookupTable<K, V>::findNode(K key) {
-    Node<K, V>* current = head;
+// Find node by key: O(n)
+Node* LookupTable::findNode(int key) {
+    Node* current = head;
     while (current != nullptr) {
         if (current->key == key) return current;
         current = current->next;
@@ -51,97 +40,69 @@ Node<K, V>* LookupTable<K, V>::findNode(K key) {
     return nullptr;
 }
 
+// Insert: O(n)
+void LookupTable::insert(int key, int value) {
+    // Nếu key đã tồn tại thì thay thế
+    Node* node = findNode(key);
+    if (node != nullptr) {
+        node->value = value;
+        return ;
+    }
 
-KV  // Insert: O(n)
-void LookupTable<K, V>::insert(K key, V value) {
-    if(replace(key, value)) return;
-
-    Node<K, V>* newNode = new Node<K, V>(key, value);
+    Node* newNode = new Node(key, value);
     newNode->next = head;
     head = newNode;
     ++currSize;
 }
 
-
-KV  // Find: O(n)
-V* LookupTable<K, V>::find(K key) {
-    Node<K, V>* node = findNode(key);
-    return (node != nullptr) ? &(node->value) : nullptr;
+// Find: O(n)
+int LookupTable::find(int key) {
+    Node* node = findNode(key);
+    return (node != nullptr) ? (node->value) : INT_MIN;
 }
 
-
-KV  // Replace: O(n)
-bool LookupTable<K, V>::replace(K key, V newValue) {
-    Node<K, V>* node = findNode(key);
-    if (node != nullptr) {
-        node->value = newValue;
-        return true;
-    }
-    return false;
-}
-
-
-KV  // Erase: O(n)
-void LookupTable<K, V>::erase(K key) {
+// Erase: O(n)
+void LookupTable::erase(int key) {
     if (head == nullptr) return;
 
-    if(head->key == key){
+    if (head->key == key) {
+        Node* toDelete = head;
         head = head->next;
+        delete toDelete;
         --currSize;
         return;
     }
 
-    Node<K, V> * curr = head;
-    while(curr->next != nullptr && curr->next->key != key){
+    Node* curr = head;
+    while (curr->next != nullptr && curr->next->key != key) {
         curr = curr->next;
     }
 
-    if(curr->next != nullptr){
+    if (curr->next != nullptr) {
+        Node* toDelete = curr->next;
         curr->next = curr->next->next;
+        delete toDelete;
         --currSize;
     }
 }
 
-
-KV  // Display all key-value: O(n)
-void LookupTable<K, V>::display() {
-
-    Node<K, V>* current = head;
+// Display all key-value: O(n)
+void LookupTable::display() {
+    Node* current = head;
     while (current != nullptr) {
         cout << "Key: " << current->key << ", Value: " << current->value << endl;
         current = current->next;
     }
 }
 
-
 int main() {
-    LookupTable<string, int> table;
+    LookupTable table;
 
-    table.insert("Alice", 30);
-    table.insert("Bob", 25);
-    table.insert("Charlie", 35);
+    table.insert(1, 30);
+    table.insert(2, 25);
+    table.insert(3, 35);
 
     cout << "Contents of the lookup table after inserts:" << endl;
-    table.display();
-
-    cout << "\nAttempting to insert 'Alice' with a new value 31:" << endl;
-    table.insert("Alice", 31);
-    table.display();
-
-    string keyToFind = "Bob";
-    int* value = table.find(keyToFind);
-    if (value) {
-        cout << "\n" << keyToFind << "'s age: " << *value << endl;
-    } else {
-        cout << "\n" << keyToFind << " not found!" << endl;
-    }
-
-    table.replace("Charlie", 40);
-    cout << "\nAfter replacing Charlie's age:" << endl;
-    table.display();
-
-    table.erase("Bob");
-    cout << "\nAfter removing Bob:" << endl;
     table.display();
 
     return 0;
