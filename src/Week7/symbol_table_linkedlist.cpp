@@ -9,13 +9,13 @@ struct Node {
     Node(int k, int v) : key(k), value(v), next(nullptr) {}
 };
 
-class LookupTable {
+class SymbolTable {
 private:
     Node* head;
     int currSize;
     Node* findNode(int key);
 public:
-    LookupTable();
+    SymbolTable();
     int size();
     void insert(int key, int value);
     int find(int key);
@@ -23,15 +23,15 @@ public:
     void display();
 };
 
-LookupTable::LookupTable() : head(nullptr), currSize(0) {}
+SymbolTable::SymbolTable() : head(nullptr), currSize(0) {}
 
 // Return current size: O(1)
-int LookupTable::size() {
+int SymbolTable::size() {
     return currSize;
 }
 
 // Find node by key: O(n)
-Node* LookupTable::findNode(int key) {
+Node* SymbolTable::findNode(int key) {
     Node* current = head;
     while (current != nullptr) {
         if (current->key == key) return current;
@@ -41,7 +41,7 @@ Node* LookupTable::findNode(int key) {
 }
 
 // Insert: O(n)
-void LookupTable::insert(int key, int value) {
+void SymbolTable::insert(int key, int value) {
     // Nếu key đã tồn tại thì thay thế
     Node* node = findNode(key);
     if (node != nullptr) {
@@ -56,13 +56,13 @@ void LookupTable::insert(int key, int value) {
 }
 
 // Find: O(n)
-int LookupTable::find(int key) {
+int SymbolTable::find(int key) {
     Node* node = findNode(key);
     return (node != nullptr) ? (node->value) : INT_MIN;
 }
 
 // Erase: O(n)
-void LookupTable::erase(int key) {
+void SymbolTable::erase(int key) {
     if (head == nullptr) return;
 
     if (head->key == key) {
@@ -87,7 +87,7 @@ void LookupTable::erase(int key) {
 }
 
 // Display all key-value: O(n)
-void LookupTable::display() {
+void SymbolTable::display() {
     Node* current = head;
     while (current != nullptr) {
         cout << "Key: " << current->key << ", Value: " << current->value << endl;
@@ -96,13 +96,13 @@ void LookupTable::display() {
 }
 
 int main() {
-    LookupTable table;
+    SymbolTable table;
 
     table.insert(1, 30);
     table.insert(2, 25);
     table.insert(3, 35);
 
-    cout << "Contents of the lookup table after inserts:" << endl;
+    cout << "Contents of the SymbolTable after inserts:" << endl;
     table.display();
 
     return 0;
