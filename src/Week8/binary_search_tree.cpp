@@ -103,11 +103,9 @@ void BinarySearchTree::deletehelper(Node* &head, int val) {
     // Tìm nút cần xóa
     if (head->data > val) {
         deletehelper(head->left, val);
-    } 
-    else if (head->data < val) {
+    } else if (head->data < val) {
         deletehelper(head->right, val);
-    } 
-    else {
+    } else {
         // Trường hợp 1 và 2: nút có một hoặc không có con
         if (head->left == NULL) {
             root = root->right;  
