@@ -60,16 +60,33 @@ void Graph::DFSHelper(int k, vector<bool> &visited){
 }
 
 void Graph::DFS(int k){
+    for(int i=0; i<=V; i++){
+        sort(adj[i].begin(), adj[i].end());
+    }
     vector<bool> visited(V, false);
     DFSHelper(k, visited);
 }
 
 int main(){
-    Graph g(5);                       
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 3);
-    g.addEdge(1, 4);
+    Graph g(12);                       
+     g.addEdge(0, 9);
+    g.addEdge(0, 5);
+    g.addEdge(1, 10);
+    g.addEdge(2, 8);
+    g.addEdge(3, 1);
+    g.addEdge(4, 5);
+    g.addEdge(5, 8);
+    g.addEdge(9, 1);
+    g.addEdge(9, 10);
+    g.addEdge(4, 2);
+    g.addEdge(8, 4);
+    g.addEdge(7, 4);
+    g.addEdge(7, 0);
+    g.addEdge(5, 0);
+    g.addEdge(10, 3);
+    g.addEdge(6, 3);
+    g.addEdge(3, 11);
+    g.addEdge(10, 6);
 
     cout << "BFS starting from vertex 0:\n";
     g.BFS(0);
